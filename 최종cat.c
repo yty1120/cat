@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include <windows.h> // À©µµ¿ì Àü¿ë
+#include <windows.h> // ìœˆë„ìš° ì „ìš©
 
 #define ROOM_WIDTH 15
 #define HME_POS 1
@@ -29,14 +29,14 @@ int main() {
 
     srand((unsigned int)time(NULL));
 
-    printf("****¾ß¿ËÀÌ¿Í ¼öÇÁ****\n\n");
+    printf("****ì•¼ì˜¹ì´ì™€ ìˆ˜í”„****\n\n");
     printf("  /\\_/\\     \n");
     printf(" ( o.o )    \n");
     printf("  > ^ <     \n\n");
 
-    printf("\n¾ß¿ËÀÌÀÇ ÀÌ¸§À» Áö¾î ÁÖ¼¼¿ä: ");
+    printf("\nì•¼ì˜¹ì´ì˜ ì´ë¦„ì„ ì§€ì–´ ì£¼ì„¸ìš”: ");
     scanf_s("%19s", name, (unsigned)_countof(name));
-    printf("¾ß¿ËÀÌÀÇ ÀÌ¸§Àº %sÀÔ´Ï´Ù.\n", name);
+    printf("ì•¼ì˜¹ì´ì˜ ì´ë¦„ì€ %sì…ë‹ˆë‹¤.\n", name);
 
     Sleep(2500);
     system("cls");
@@ -52,12 +52,12 @@ int main() {
 
         int moodRoll = rand() % 6 + 1;
         int threshold = 6 - affinity;
-        printf("ÁÖ»çÀ§¸¦ ±¼¸³´Ï´Ù. ¶Ç¸£¸£...\n");
-        printf("%dÀÌ(°¡) ³ª¿Ô½À´Ï´Ù.\n", moodRoll);
+        printf("ì£¼ì‚¬ìœ„ë¥¼ êµ´ë¦½ë‹ˆë‹¤. ë˜ë¥´ë¥´...\n");
+        printf("%dì´(ê°€) ë‚˜ì™”ìŠµë‹ˆë‹¤.\n", moodRoll);
         if (moodRoll <= threshold && mood > 0) {
             mood--;
-            printf("¾Æ¹« ÀÌÀ¯ ¾øÀÌ ±âºĞÀÌ ³ªºüÁı´Ï´Ù. °í¾çÀÌ´Ï±î¿ä.\n");
-            printf("%sÀÇ ±âºĞÀÌ ³ªºüÁı´Ï´Ù: %d -> %d\n", name, mood + 1, mood);
+            printf("ì•„ë¬´ ì´ìœ  ì—†ì´ ê¸°ë¶„ì´ ë‚˜ë¹ ì§‘ë‹ˆë‹¤. ê³ ì–‘ì´ë‹ˆê¹Œìš”.\n");
+            printf("%sì˜ ê¸°ë¶„ì´ ë‚˜ë¹ ì§‘ë‹ˆë‹¤: %d -> %d\n", name, mood + 1, mood);
         }
 
         drawRoom(cat_x, prevPos, hasScratcher, hasTower);
@@ -67,22 +67,22 @@ int main() {
         int optionMouse = -1;
         int optionLaser = -1;
 
-        printf("¾î¶² »óÈ£ÀÛ¿ëÀ» ÇÏ½Ã°Ú½À´Ï±î?\n");
-        printf("  %d. ¾Æ¹«°Íµµ ÇÏÁö ¾ÊÀ½\n", menuNum++);
-        printf("  %d. ±Ü¾î ÁÖ±â\n", menuNum++);
+        printf("ì–´ë–¤ ìƒí˜¸ì‘ìš©ì„ í•˜ì‹œê² ìŠµë‹ˆê¹Œ?\n");
+        printf("  %d. ì•„ë¬´ê²ƒë„ í•˜ì§€ ì•ŠìŒ\n", menuNum++);
+        printf("  %d. ê¸ì–´ ì£¼ê¸°\n", menuNum++);
         if (hasToyMouse) {
             optionMouse = menuNum;
-            printf("  %d. Àå³­°¨ Áã·Î ³î¾Æ ÁÖ±â\n", menuNum++);
+            printf("  %d. ì¥ë‚œê° ì¥ë¡œ ë†€ì•„ ì£¼ê¸°\n", menuNum++);
         }
         if (hasLaser) {
             optionLaser = menuNum;
-            printf("  %d. ·¹ÀÌÀú Æ÷ÀÎÅÍ·Î ³î¾Æ ÁÖ±â\n", menuNum++);
+            printf("  %d. ë ˆì´ì € í¬ì¸í„°ë¡œ ë†€ì•„ ì£¼ê¸°\n", menuNum++);
         }
 
         while (1) {
             printf(">> ");
             if (scanf_s("%d", &userChoice) != 1 || userChoice < 0 || userChoice >= menuNum) {
-                printf("Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù. ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä.\n");
+                printf("ì˜ëª»ëœ ì…ë ¥ì…ë‹ˆë‹¤. ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”.\n");
                 while (getchar() != '\n');
             }
             else break;
@@ -91,42 +91,42 @@ int main() {
         if (userChoice == 0) {
             if (mood > 0) {
                 mood--;
-                printf("%sÀÇ ±âºĞÀÌ ³ªºüÁ³½À´Ï´Ù: %d -> %d\n", name, mood + 1, mood);
+                printf("%sì˜ ê¸°ë¶„ì´ ë‚˜ë¹ ì¡ŒìŠµë‹ˆë‹¤: %d -> %d\n", name, mood + 1, mood);
             }
             int roll = rand() % 6 + 1;
             if (roll <= 5 && affinity > 0) {
                 affinity--;
-                printf("Áı»ç¿ÍÀÇ °ü°è°¡ ³ªºüÁı´Ï´Ù.\n");
+                printf("ì§‘ì‚¬ì™€ì˜ ê´€ê³„ê°€ ë‚˜ë¹ ì§‘ë‹ˆë‹¤.\n");
             }
         }
         else if (userChoice == 1) {
-            printf("%sÀÇ ±âºĞÀº ±×´ë·ÎÀÔ´Ï´Ù: %d\n", name, mood);
+            printf("%sì˜ ê¸°ë¶„ì€ ê·¸ëŒ€ë¡œì…ë‹ˆë‹¤: %d\n", name, mood);
             int roll = rand() % 6 + 1;
             if (roll >= 5 && affinity < 4) {
                 affinity++;
-                printf("Ä£¹Ğµµ°¡ Áõ°¡Çß½À´Ï´Ù.\n");
+                printf("ì¹œë°€ë„ê°€ ì¦ê°€í–ˆìŠµë‹ˆë‹¤.\n");
             }
         }
         else if (userChoice == optionMouse) {
             if (mood < 3) {
-                printf("Àå³­°¨ Áã·Î %s¿Í ³î¾Æ ÁÖ¾ú½À´Ï´Ù. %sÀÇ ±âºĞÀÌ Á¶±İ ÁÁ¾ÆÁ³½À´Ï´Ù: %d -> %d\n", name, name, mood, mood + 1);
+                printf("ì¥ë‚œê° ì¥ë¡œ %sì™€ ë†€ì•„ ì£¼ì—ˆìŠµë‹ˆë‹¤. %sì˜ ê¸°ë¶„ì´ ì¡°ê¸ˆ ì¢‹ì•„ì¡ŒìŠµë‹ˆë‹¤: %d -> %d\n", name, name, mood, mood + 1);
                 mood++;
             }
             int roll = rand() % 6 + 1;
             if (roll >= 4 && affinity < 4) {
                 affinity++;
-                printf("Ä£¹Ğµµ°¡ Áõ°¡Çß½À´Ï´Ù.\n");
+                printf("ì¹œë°€ë„ê°€ ì¦ê°€í–ˆìŠµë‹ˆë‹¤.\n");
             }
         }
         else if (userChoice == optionLaser) {
             int old = mood;
             mood += 2;
             if (mood > 3) mood = 3;
-            printf("·¹ÀÌÀú Æ÷ÀÎÅÍ·Î %s¿Í ½Å³ª°Ô ³î¾Æ ÁÖ¾ú½À´Ï´Ù. %sÀÇ ±âºĞÀÌ ²Ï ÁÁ¾ÆÁ³½À´Ï´Ù: %d -> %d\n", name, name, old, mood);
+            printf("ë ˆì´ì € í¬ì¸í„°ë¡œ %sì™€ ì‹ ë‚˜ê²Œ ë†€ì•„ ì£¼ì—ˆìŠµë‹ˆë‹¤. %sì˜ ê¸°ë¶„ì´ ê½¤ ì¢‹ì•„ì¡ŒìŠµë‹ˆë‹¤: %d -> %d\n", name, name, old, mood);
             int roll = rand() % 6 + 1;
             if (roll >= 2 && affinity < 4) {
                 affinity++;
-                printf("Ä£¹Ğµµ°¡ Áõ°¡Çß½À´Ï´Ù.\n");
+                printf("ì¹œë°€ë„ê°€ ì¦ê°€í–ˆìŠµë‹ˆë‹¤.\n");
             }
         }
 
@@ -150,13 +150,13 @@ int main() {
         if (cat_x == BWL_POS) {
             int randomSoup = rand() % 3;
             char soupName[20];
-            if (randomSoup == 0) snprintf(soupName, sizeof(soupName), "°¨ÀÚ ¼öÇÁ");
-            else if (randomSoup == 1) snprintf(soupName, sizeof(soupName), "¾ç¼ÛÀÌ ¼öÇÁ");
-            else snprintf(soupName, sizeof(soupName), "ºê·ÎÄİ¸® ¼öÇÁ");
+            if (randomSoup == 0) snprintf(soupName, sizeof(soupName), "ê°ì ìˆ˜í”„");
+            else if (randomSoup == 1) snprintf(soupName, sizeof(soupName), "ì–‘ì†¡ì´ ìˆ˜í”„");
+            else snprintf(soupName, sizeof(soupName), "ë¸Œë¡œì½œë¦¬ ìˆ˜í”„");
 
             soup_count++;
             cp++;
-            printf("¾ß¿ËÀÌ°¡ %s¸¦ ¸¸µé¾ú½À´Ï´Ù!\n", soupName);
+            printf("ì•¼ì˜¹ì´ê°€ %së¥¼ ë§Œë“¤ì—ˆìŠµë‹ˆë‹¤!\n", soupName);
         }
 
         openShop(&cp, &hasToyMouse, &hasLaser, &hasScratcher, &hasTower);
@@ -191,48 +191,48 @@ void drawRoom(int cat_x, int prevPos, int hasScratcher, int hasTower) {
 }
 
 void openShop(int* cp, int* hasToyMouse, int* hasLaser, int* hasScratcher, int* hasTower) {
-    // TODO: »óÁ¡ ±â´É ±¸Çö ¿¹Á¤
+    // TODO: ìƒì  ê¸°ëŠ¥ êµ¬í˜„ ì˜ˆì •
 }
 
 void triggerMiniGame(int* mood) {
-    const char* answers[] = { "½ºÅ©·¡Ã³", "Ä¹Å¸¿ö", "°£½Ä", "Àå³­°¨", "·¹ÀÌÀú" };
-    const char* clues[] = { "¤µ¤»¤©¤º", "¤»¤¼¤·", "¤¡¤µ", "¤¸¤¤¤¡", "¤©¤·¤¸" };
+    const char* answers[] = { "ìŠ¤í¬ë˜ì²˜", "ìº£íƒ€ì›Œ", "ê°„ì‹", "ì¥ë‚œê°", "ë ˆì´ì €" };
+    const char* clues[] = { "ã……ã…‹ã„¹ã…Š", "ã…‹ã…Œã…‡", "ã„±ã……", "ã…ˆã„´ã„±", "ã„¹ã…‡ã…ˆ" };
     int total = 5;
     int index = rand() % total;
 
-    printf("µ¹¹ß Äù½ºÆ® ¹ß»ı! ÂË¶±ÀÌÀÇ ÃÊ¼º ÄûÁî!\n");
-    printf("ÂË¶±ÀÌ°¡ ¿øÇÏ´Â ¹°°ÇÀÇ ÃÊ¼ºÀº [%s]ÀÔ´Ï´Ù.\n", clues[index]);
-    printf("Á¤´äÀ» ÀÔ·ÂÇÏ¼¼¿ä: ");
+    printf("ëŒë°œ í€˜ìŠ¤íŠ¸ ë°œìƒ! ì«€ë–¡ì´ì˜ ì´ˆì„± í€´ì¦ˆ!\n");
+    printf("ì«€ë–¡ì´ê°€ ì›í•˜ëŠ” ë¬¼ê±´ì˜ ì´ˆì„±ì€ [%s]ì…ë‹ˆë‹¤.\n", clues[index]);
+    printf("ì •ë‹µì„ ì…ë ¥í•˜ì„¸ìš”: ");
 
     char input[50];
     scanf_s("%49s", input, (unsigned)_countof(input));
 
     if (strcmp(input, answers[index]) == 0) {
         if (*mood < 3) (*mood)++;
-        printf("Á¤´äÀÔ´Ï´Ù! ±âºĞÀÌ ÁÁ¾ÆÁ³½À´Ï´Ù.\n");
+        printf("ì •ë‹µì…ë‹ˆë‹¤! ê¸°ë¶„ì´ ì¢‹ì•„ì¡ŒìŠµë‹ˆë‹¤.\n");
     }
     else {
         if (*mood > 0) (*mood)--;
-        printf("¿À´äÀÔ´Ï´Ù! ±âºĞÀÌ ³ªºüÁ³½À´Ï´Ù.\n");
+        printf("ì˜¤ë‹µì…ë‹ˆë‹¤! ê¸°ë¶„ì´ ë‚˜ë¹ ì¡ŒìŠµë‹ˆë‹¤.\n");
     }
 }
 
 void printGameState(const char* name, int soup_count, int affinity, int cp, int mood) {
-    const char* moodText[] = { "±âºĞÀÌ ¸Å¿ì ³ª»Ş´Ï´Ù.", "½É½ÉÇØÇÕ´Ï´Ù.", "½Ä»§À» ±Á½À´Ï´Ù.", "°ñ°ñ¼ÛÀ» ºÎ¸¨´Ï´Ù." };
+    const char* moodText[] = { "ê¸°ë¶„ì´ ë§¤ìš° ë‚˜ì©ë‹ˆë‹¤.", "ì‹¬ì‹¬í•´í•©ë‹ˆë‹¤.", "ì‹ë¹µì„ êµ½ìŠµë‹ˆë‹¤.", "ê³¨ê³¨ì†¡ì„ ë¶€ë¦…ë‹ˆë‹¤." };
     const char* affinityText[] = {
-        "°ç¿¡ ¿À´Â °ÍÁ¶Â÷ ½È¾îÇÕ´Ï´Ù.",
-        "°£½Ä ÀÚÆÇ±â Ãë±ŞÀÔ´Ï´Ù.",
-        "±×·°Àú·° ¾µ¸¸ÇÑ Áı»çÀÔ´Ï´Ù.",
-        "ÈÇ¸¢ÇÑ Áı»ç·Î ÀÎÁ¤ ¹Ş°í ÀÖ½À´Ï´Ù.",
-        "Áı»ç ²­µüÁöÀÔ´Ï´Ù."
+        "ê³ì— ì˜¤ëŠ” ê²ƒì¡°ì°¨ ì‹«ì–´í•©ë‹ˆë‹¤.",
+        "ê°„ì‹ ìíŒê¸° ì·¨ê¸‰ì…ë‹ˆë‹¤.",
+        "ê·¸ëŸ­ì €ëŸ­ ì“¸ë§Œí•œ ì§‘ì‚¬ì…ë‹ˆë‹¤.",
+        "í›Œë¥­í•œ ì§‘ì‚¬ë¡œ ì¸ì • ë°›ê³  ìˆìŠµë‹ˆë‹¤.",
+        "ì§‘ì‚¬ ê»Œë”±ì§€ì…ë‹ˆë‹¤."
     };
 
-    printf("=============== ÇöÀç »óÅÂ ===============\n");
-    printf("ÇöÀç±îÁö ¸¸µç ¼öÇÁ: %d°³\n", soup_count);
-    printf("CP: %d Æ÷ÀÎÆ®\n", cp);
-    printf("%sÀÇ ±âºĞ(0~3): %d\n", name, mood);
+    printf("=============== í˜„ì¬ ìƒíƒœ ===============\n");
+    printf("í˜„ì¬ê¹Œì§€ ë§Œë“  ìˆ˜í”„: %dê°œ\n", soup_count);
+    printf("CP: %d í¬ì¸íŠ¸\n", cp);
+    printf("%sì˜ ê¸°ë¶„(0~3): %d\n", name, mood);
     printf("%s\n", moodText[mood]);
-    printf("Áı»ç¿ÍÀÇ °ü°è(0~4): %d\n", affinity);
+    printf("ì§‘ì‚¬ì™€ì˜ ê´€ê³„(0~4): %d\n", affinity);
     printf("  %s\n", affinityText[affinity]);
     printf("=========================================\n");
 }
