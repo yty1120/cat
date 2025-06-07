@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include <windows.h> 
+#include <windows.h>
 
 #define ROOM_WIDTH 15
 #define HME_POS 1
@@ -49,6 +49,9 @@ int main() {
             cat_x += dir;
         }
 
+        // 2-4 행동 처리 기능 추가
+        performAction(cat_x, &mood, &soup_count, &cp, name, hasScratcher, hasTower);
+
         Sleep(2500);
         system("cls");
     }
@@ -56,7 +59,33 @@ int main() {
     return 0;
 }
 
-
+// 2-4 행동 처리 기능 함수 정의
+void performAction(int cat_x, int* mood, int* soup_count, int* cp, const char* name, int hasScratcher, int hasTower) {
+    if (cat_x == HME_POS) {
+        if (*mood < 3) {
+            (*mood)++;
+            printf("집에서 쉰 %s의 기분이 좋아졌습니다: %d\n", name, *mood);
+        }
+    }
+    else if (hasTower && cat_x == 3) {
+        if (*mood < 2) (*mood) += 2;
+        else if (*mood == 2) (*mood)++;
+        printf("%s가 캣타워에서 놀아 기분이 좋아졌습니다.\n", name);
+    }
+    else if (hasScratcher && cat_x == 5) {
+        if (*mood < 3) {
+            (*mood)++;
+            printf("%s가 스크래처에서 놀아 기분이 살짝 좋아졌습니다.\n", name);
+        }
+    }
+    else if (cat_x == BWL_POS) {
+        int type = rand() % 3;
+        const char* names[] = { "감자 수프", "양송이 수프", "브로콜리 수프" };
+        printf("%s가 %s를 만들었습니다!\n", name, names[type]);
+        (*soup_count)++;
+        (*cp)++;
+    }
+}
 
 void printGameState(const char* name, int soup_count, int affinity, int cp, int mood) {
     const char* moodText[] = {
@@ -101,6 +130,7 @@ void drawRoom(int cat_x, int prevPos, int hasScratcher, int hasTower) {
     for (int i = 0; i < ROOM_WIDTH; i++) printf("#");
     printf("\n\n");
 }
+
 
 
 
