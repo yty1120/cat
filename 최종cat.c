@@ -7,49 +7,53 @@
 #define HME_POS 1
 #define BWL_POS (ROOM_WIDTH - 2)
 
-//  상태창 출력 기능
-void printGameState(const char* name, int soup_count, int affinity, int cp);
+// 상태창 출력 기능
+void printGameState(int soup_count, int affinity, int mood);
+
 
 void drawRoom(int cat_x);
 
 int main() {
-    char name[20];
-    int soup_count = 0;
-    int affinity = 2;
-    int cp = 0;
-    int cat_x = HME_POS;
+    int soup_count = 0;    // 만든 수프 개수
+    int affinity = 2;      // 집사와의 친밀도
+    int mood = 3;          // 고양이 기분 (0~3)
+    int cat_x = HME_POS;   // 고양이 위치
 
     srand((unsigned int)time(NULL));
 
-    printf("****야옹이와 수프****\n\n");
-    printf("  /\\_/\\     \n");
-    printf(" ( o.o )    \n");
-    printf("  > ^ <     \n\n");
-
-    printf("\n야옹이의 이름을 지어 주세요: ");
-    scanf_s("%19s", name, (unsigned)_countof(name));
-    printf("야옹이의 이름은 %s입니다.\n", name);
-
-    Sleep(2500);
-    system("cls");
-
     while (1) {
-        printGameState(name, soup_count, affinity, cp);
-        drawRoom(cat_x);
+        //  기분 시스템 - 주사위로 기분 변화
+        int moodRoll = rand() % 6 + 1;
+        int threshold = 6 - affinity;
+        printf("주사위를 굴립니다... %d 나옴\n", moodRoll);
 
-        // 테스트용 간단 이동
-        cat_x++;
-        if (cat_x > BWL_POS) cat_x = HME_POS;
+        if (moodRoll <= threshold && mood > 0) {
+            mood--;
+            printf("기분이 나빠졌습니다! 현재 기분: %d\n", mood);
+        }
 
-        Sleep(2000);
+        printGameState(soup_count, affinity, mood); // 상태창 출력
+        drawRoom(cat_x); // 방 출력
+
+        //  고양이 위치 이동 기분에 따라 이동
+        if (mood == 0 && cat_x > HME_POS) cat_x--;
+        else if (mood == 3 && cat_x < BWL_POS) cat_x++;
+
+        Sleep(2500);
         system("cls");
     }
 
     return 0;
 }
 
-// 상태창 출력 기능
-void printGameState(const char* name, int soup_count, int affinity, int cp) {
+//  상태창 출력 기능
+void printGameState(int soup_count, int affinity, int mood) {
+    const char* moodText[] = {
+        "기분이 매우 나쁩니다.",
+        "심심해합니다.",
+        "식빵을 굽습니다.",
+        "골골송을 부릅니다."
+    };
     const char* affinityText[] = {
         "곁에 오는 것조차 싫어합니다.",
         "간식 자판기 취급입니다.",
@@ -60,11 +64,11 @@ void printGameState(const char* name, int soup_count, int affinity, int cp) {
 
     printf("=============== 현재 상태 ===============\n");
     printf("현재까지 만든 수프: %d개\n", soup_count);
-    printf("CP: %d 포인트\n", cp);
-    printf("집사와의 관계(0~4): %d\n", affinity);
-    printf("  %s\n", affinityText[affinity]);
+    printf("집사와의 관계(0~4): %d - %s\n", affinity, affinityText[affinity]);
+    printf("고양이의 기분(0~3): %d - %s\n", mood, moodText[mood]);
     printf("=========================================\n");
 }
+
 
 void drawRoom(int cat_x) {
     printf("\n");
