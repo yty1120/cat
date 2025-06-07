@@ -1,17 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <windows.h> 
+#include <windows.h> // 윈도우 전용
 
 #define ROOM_WIDTH 15
 #define HME_POS 1
 #define BWL_POS (ROOM_WIDTH - 2)
 
-// 상태창 출력 기능
+//  상태창 출력 기능
 void printGameState(int soup_count, int affinity, int mood);
 
-
+//  방 구조 출력 기능
 void drawRoom(int cat_x);
+
+//  이동 시스템 (기분에 따라 이동 처리)
+void updateCatPosition(int* cat_x, int mood);
 
 int main() {
     int soup_count = 0;    // 만든 수프 개수
@@ -32,12 +35,11 @@ int main() {
             printf("기분이 나빠졌습니다! 현재 기분: %d\n", mood);
         }
 
-        printGameState(soup_count, affinity, mood); // 상태창 출력
-        drawRoom(cat_x); // 방 출력
+        printGameState(soup_count, affinity, mood); // 상태 출력
+        drawRoom(cat_x);                            // 방 출력
 
-        //  고양이 위치 이동 기분에 따라 이동
-        if (mood == 0 && cat_x > HME_POS) cat_x--;
-        else if (mood == 3 && cat_x < BWL_POS) cat_x++;
+        // 🐾 고양이 이동 시스템 적용
+        updateCatPosition(&cat_x, mood);
 
         Sleep(2500);
         system("cls");
@@ -69,7 +71,7 @@ void printGameState(int soup_count, int affinity, int mood) {
     printf("=========================================\n");
 }
 
-
+//  방 구조 출력 기능
 void drawRoom(int cat_x) {
     printf("\n");
     for (int i = 0; i < ROOM_WIDTH; i++) printf("#");
@@ -88,4 +90,16 @@ void drawRoom(int cat_x) {
     for (int i = 0; i < ROOM_WIDTH; i++) printf("#");
     printf("\n\n");
 }
+
+//  고양이 이동 시스템
+void updateCatPosition(int* cat_x, int mood) {
+    if (mood == 0 && *cat_x > HME_POS) {
+        (*cat_x)--; // 기분이 매우 나쁠 때 집 방향으로 이동
+    } else if (mood == 3 && *cat_x < BWL_POS) {
+        (*cat_x)++; // 기분이 좋을 때 수프 방향으로 이동
+    } else {
+        // 기분이 1~2일 때는 이동 없음
+    }
+}
+
 
