@@ -76,7 +76,50 @@ int main() {
                 while (getchar() != '\n');
             } else break;
         }
-      
+      // ==================== [2-6 행동 처리 기능 추가] ====================
+if (userChoice == 0) {
+    if (mood > 0) {
+        mood--;
+        printf("%s의 기분이 나빠졌습니다: %d -> %d\n", name, mood + 1, mood);
+    }
+    int roll = rand() % 6 + 1;
+    if (roll <= 5 && affinity > 0) {
+        affinity--;
+        printf("집사와의 관계가 나빠집니다.\n");
+    }
+}
+else if (userChoice == 1) {
+    printf("%s의 기분은 그대로입니다: %d\n", name, mood);
+    int roll = rand() % 6 + 1;
+    if (roll >= 5 && affinity < 4) {
+        affinity++;
+        printf("친밀도가 증가했습니다.\n");
+    }
+}
+else if (userChoice == optionMouse) {
+    if (mood < 3) {
+        printf("장난감 쥐로 %s와 놀아 주었습니다. %s의 기분이 조금 좋아졌습니다: %d -> %d\n", name, name, mood, mood + 1);
+        mood++;
+    }
+    int roll = rand() % 6 + 1;
+    if (roll >= 4 && affinity < 4) {
+        affinity++;
+        printf("친밀도가 증가했습니다.\n");
+    }
+}
+else if (userChoice == optionLaser) {
+    int old = mood;
+    mood += 2;
+    if (mood > 3) mood = 3;
+    printf("레이저 포인터로 %s와 신나게 놀아 주었습니다. %s의 기분이 꽤 좋아졌습니다: %d -> %d\n", name, name, old, mood);
+    int roll = rand() % 6 + 1;
+    if (roll >= 2 && affinity < 4) {
+        affinity++;
+        printf("친밀도가 증가했습니다.\n");
+    }
+}
+// ===================================================================
+
     }
 
     return 0;
